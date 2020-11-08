@@ -23,23 +23,23 @@ F9  -  No recoil
   <dd>Radarhack displays all enemies on the radar, which means that by looking periodically at the radar, you will know the location of the enemies</dd>
 </dl>
 ![](images/Radarhack.jpg "Radarhack")
- - Wallhack:
+  - Wallhack:
 <dl>
   <dt>Functions:</dt> 
   <dd>Wallhack shows all opponents, even those behind the walls</dd>
 </dl>
 ![](images/Wallhack.png "Wallhack")
- - Bunnyhop
+  - Bunnyhop:
 <dl>
   <dt>Functions:</dt> 
   <dd>Bunnyhop helps you move quickly on the map. You can jump out of the wall unexpectedly and kill your opponent</dd>
 </dl>
- - No flash
+  - No flash:
 <dl>
   <dt>Functions:</dt> 
   <dd>With this feature flash grenades will no longer blind you</dd>
 </dl>
- - No recoil
+  - No recoil:
 <dl>
   <dt>Functions:</dt> 
   <dd>Without kickback, all bullets fly to one point, which may help when firing some weapons</dd>
