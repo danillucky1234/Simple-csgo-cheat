@@ -22,26 +22,26 @@ F9  -  No recoil
   <dt>Functions:</dt> 
   <dd>Radarhack displays all enemies on the radar, which means that by looking periodically at the radar, you will know the location of the enemies</dd>
 </dl>
-![](https://github.com/danillucky1234/Simple-csgo-cheat/blob/main/images/Radarhack.jpg "Radarhack")
-- Wallhack:
+![](images/Radarhack.jpg "Radarhack")
+ - Wallhack:
 <dl>
   <dt>Functions:</dt> 
   <dd>Wallhack shows all opponents, even those behind the walls</dd>
 </dl>
-![](https://github.com/danillucky1234/Simple-csgo-cheat/blob/main/images/Wallhack.png "Wallhack")
-- Bunnyhop
+![](images/Wallhack.png "Wallhack")
+ - Bunnyhop
 <dl>
   <dt>Functions:</dt> 
   <dd>Bunnyhop helps you move quickly on the map. You can jump out of the wall unexpectedly and kill your opponent</dd>
 </dl>
-- No flash
+ - No flash
 <dl>
   <dt>Functions:</dt> 
   <dd>With this feature flash grenades will no longer blind you</dd>
 </dl>
-- No recoil
+ - No recoil
 <dl>
   <dt>Functions:</dt> 
   <dd>Without kickback, all bullets fly to one point, which may help when firing some weapons</dd>
 </dl>
-![alt text](https://github.com/danillucky1234/Simple-csgo-cheat/blob/main/images/NoRecoil.png "No recoil")
+![alt text](images/NoRecoil.png "No recoil")
