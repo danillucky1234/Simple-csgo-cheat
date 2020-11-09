@@ -5,8 +5,9 @@ Extremely simple external cheat for cs go. You can use it to learn something new
 1. You need to go to https://github.com/frk1/hazedumper/blob/master/csgo.cs and check the availability of updated offsets. If there are new offsets, be sure to replace their values in the Offsets.cpp file.
 2. Open the project in Visual Studio, set the Release configuration | x86 and build the solution.
 3. Open cs:go
-4. In Explorer, find a file with the extension .exe and run it. Or you can compile the solution directly into Visual Studio
-5. Enjoy it!
+4. In the project folder, find the Release folder, open it and run the file with the .exe extension. Or you can compile the solution directly into Visual Studio
+5. Use hotkeys to enable/disable certain cheat functions
+6. Enjoy it!
 
 ## Hot keys
 F5  -  Radarhack</br>
