@@ -1,12 +1,8 @@
 #pragma once
 #include "CMemory.h"
 
-class CWallHack
+class CWallHack : public Memory
 {
-private:
-	Memory mMemory;
-	MODULE mModule;
-	Process pProcess;
 public:
 	CWallHack(MODULE mModule, Process pProcess);
 	void Hack(bool _switch);

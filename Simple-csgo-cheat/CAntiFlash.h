@@ -1,12 +1,8 @@
 #pragma once
 #include "CMemory.h"
 
-class CAntiFlash
+class CAntiFlash : public Memory
 {
-private:
-	Memory mMemory;
-	MODULE mModule;
-	Process pProcess;
 public:
 	CAntiFlash(MODULE mModule, Process pProcess);
 	void Hack(bool _switch);

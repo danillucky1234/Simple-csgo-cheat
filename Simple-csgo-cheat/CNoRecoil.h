@@ -8,13 +8,9 @@ struct Vector2
 	float y;
 };
 
-class CNoRecoil
+class CNoRecoil : public Memory
 {
 private:
-	Memory mMemory;
-	MODULE mModule;
-	Process pProcess;
-	MODULEENGINE mModuleEngine;
 	CBaseCombatWeapon wWeapon;
 public:
 	CNoRecoil(MODULE mModule, Process pProcess, MODULEENGINE mModuleEngine);

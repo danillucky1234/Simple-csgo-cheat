@@ -40,11 +40,7 @@ int main(int argc, char* argv[])
 	}
 	std::cout << "PID = " << dwPID << std::endl;
 	int input;
-	bool _switchRadar = false; // turn on/off radarhack
-	bool _switchBhop = false; // turn on/off bunnyhop
-	bool _switchWallHack = false; // turn on/off wallhack
-	bool _switchAntiFlash = false; // turn on/off no flash 
-	bool _switchRecoil = false; // turn on/off no recoil
+	bool _switch[] = { false, false, false, false, false };
 	Radar rRadar(mMemory.getModule(), mMemory.getProcess());
 	CBhop bBhop(mMemory.getModule(), mMemory.getProcess());
 	CWallHack wWallHack(mMemory.getModule(), mMemory.getProcess());
@@ -59,19 +55,19 @@ int main(int argc, char* argv[])
 		<< "F8  -  No flash\n"
 		<< "F9  -  No recoil\n";
 	// Run the thread with radar
-	std::thread thrRadar(&Radar::Hack, rRadar, _switchRadar);
+	std::thread thrRadar(&Radar::Hack, rRadar, *(_switch + 0));
 	thrRadar.detach();
 	// Run the thread with bunnyhop
-	std::thread thrBunnyHop(&CBhop::Hack, bBhop, _switchBhop);
+	std::thread thrBunnyHop(&CBhop::Hack, bBhop, *(_switch + 1));
 	thrBunnyHop.detach();
 	// Run the thread with wallhach
-	std::thread thrWallHack(&CWallHack::Hack, wWallHack, _switchWallHack);
+	std::thread thrWallHack(&CWallHack::Hack, wWallHack, *(_switch + 2));
 	thrWallHack.detach();
 	// Run the thread with no flash
-	std::thread thrAntiFlash(&CAntiFlash::Hack, aAntiFlash, _switchAntiFlash);
+	std::thread thrAntiFlash(&CAntiFlash::Hack, aAntiFlash, *(_switch + 3));
 	thrAntiFlash.detach();
 	// Run the thread with no recoil
-	std::thread thrNoRecoil(&CNoRecoil::Hack, nNoRecoil, _switchRecoil);
+	std::thread thrNoRecoil(&CNoRecoil::Hack, nNoRecoil, *(_switch + 4));
 	thrNoRecoil.detach();
 
 	while (true)

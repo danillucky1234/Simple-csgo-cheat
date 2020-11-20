@@ -5,8 +5,6 @@ Radar::Radar(MODULE mModule, Process pProcess)
 {
 	this->mModule = mModule;
 	this->pProcess = pProcess;
-	mMemory.setProcess(this->pProcess);
-	mMemory.setModule(this->mModule);
 }
 
 void Radar::Hack(bool _switch)
@@ -16,9 +14,9 @@ void Radar::Hack(bool _switch)
 	DWORD dwLocalTeam;
 	while (true)
 	{
-		dwLocal = mMemory.Read<DWORD>(mModule.dwBaseAddr + offset::dwLocalPlayer); 
-		dwLocalHP = mMemory.Read<DWORD>(dwLocal + offset::dwHealth); 
-		dwLocalTeam = mMemory.Read<DWORD>(dwLocal + offset::dwTeamNum); // find out which team our player is in.
+		dwLocal = Read<DWORD>(mModule.dwBaseAddr + offset::dwLocalPlayer); 
+		dwLocalHP = Read<DWORD>(dwLocal + offset::dwHealth); 
+		dwLocalTeam = Read<DWORD>(dwLocal + offset::dwTeamNum); // find out which team our player is in.
 		// The F5 key will enable/disable the radarhack
 		if (GetAsyncKeyState(VK_F5) & 1)
 		{
@@ -44,24 +42,24 @@ void Radar::Hack(bool _switch)
 			{
 				// We find the base address of another player, add the offset to it, find the next player in the list and multiply by 0x10.
 																// 0х10 - это sizeof CEntityClient
-				DWORD dwEntity = mMemory.Read<DWORD>(mModule.dwBaseAddr + offset::dwEntityList + (i - 1) * 0x10);
-				DWORD dwEntityHP = mMemory.Read<DWORD>(dwEntity + offset::dwHealth); // We read the health of another player
+				DWORD dwEntity = Read<DWORD>(mModule.dwBaseAddr + offset::dwEntityList + (i - 1) * 0x10);
+				DWORD dwEntityHP = Read<DWORD>(dwEntity + offset::dwHealth); // We read the health of another player
 				if (dwEntityHP <= 0) // If he is dead, do not show him on the screen
 				{
 					continue;
 				}
-				DWORD dwEntityTeam = mMemory.Read<DWORD>(dwEntity + offset::dwTeamNum); // We read which team the other player is in.
+				DWORD dwEntityTeam = Read<DWORD>(dwEntity + offset::dwTeamNum); // We read which team the other player is in.
 				//  If this player is in our team - do not show him on the screen
 				if (dwEntityTeam == dwLocalTeam)
 				{
 					continue;
 				}
-				DWORD dwEntitySpotted = mMemory.Read<bool>(dwEntity + offset::m_bSpotted); // Will we find out if a player has been spotted by anyone on our team?
+				DWORD dwEntitySpotted = Read<bool>(dwEntity + offset::m_bSpotted); // Will we find out if a player has been spotted by anyone on our team?
 				if (dwEntitySpotted) // If noticed, we don't write it. 
 				{
 					continue;
 				}
-				mMemory.Write<DWORD>(dwEntity + offset::m_bSpotted, TRUE); // Show the point where the other player is on the radar
+				Write<DWORD>(dwEntity + offset::m_bSpotted, TRUE); // Show the point where the other player is on the radar
 			}
 			Sleep(5);
 		}

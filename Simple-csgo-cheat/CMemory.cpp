@@ -1,10 +1,9 @@
 #include <iostream>
 #include "CMemory.h"
-#include "Offsets.h"
 
 bool Memory::AddModule(std::string nameOfDll)
 {
-	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pProcess.dwPID); // Находим хендл снапшота 
+	HANDLE hSnapshot = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE, pProcess.dwPID); // Find snapshot handle 
 	if (hSnapshot == INVALID_HANDLE_VALUE)
 	{
 		return false;

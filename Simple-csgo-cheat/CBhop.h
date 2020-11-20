@@ -1,14 +1,12 @@
 #pragma once
 #include "CMemory.h"
 
-class CBhop
+class CBhop : public Memory
 {
 private:
-	Memory mMemory;
-	MODULE mModule;
-	Process pProcess;
+	void PatchEx(BYTE* dst, BYTE* src, unsigned int size, HANDLE hProcess);
 public:
 	CBhop(MODULE mModule, Process pProcess);
 	void Hack(bool _switch);
-	void PatchEx(BYTE* dst, BYTE* src, unsigned int size, HANDLE hProcess);
+
 };

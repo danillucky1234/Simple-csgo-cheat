@@ -6,8 +6,6 @@ CNoRecoil::CNoRecoil(MODULE mModule, Process pProcess, MODULEENGINE mModuleEngin
 	this->mModule = mModule;
 	this->pProcess = pProcess;
 	this->mModuleEngine = mModuleEngine;
-	mMemory.setProcess(this->pProcess);
-	mMemory.setModule(this->mModule);
 }
 
 void CNoRecoil::Hack(bool _switch)
@@ -17,12 +15,13 @@ void CNoRecoil::Hack(bool _switch)
 	Vector2 vPunch;
 	Vector2 NewViewAngles;
 	Vector2 OldAimPunch;
-	OldAimPunch.x = OldAimPunch.y = 0;
+	OldAimPunch.x = 0;
+	OldAimPunch.y = 0;
 
 	DWORD dwLocal;
 	while (true)
 	{
-		dwLocal = mMemory.Read<DWORD>(mModule.dwBaseAddr + offset::dwLocalPlayer);
+		dwLocal = Read<DWORD>(mModule.dwBaseAddr + offset::dwLocalPlayer);
 		if (GetAsyncKeyState(VK_F9) & 1)
 		{
 			_switch = !_switch;
@@ -38,19 +37,19 @@ void CNoRecoil::Hack(bool _switch)
 		}
 		if (_switch)
 		{
-			vPunch = mMemory.Read<Vector2>(dwLocal + offset::m_aimPunchAngle); // Get The Aim Punch Angle
-			int pShotsFired = mMemory.Read<int>(dwLocal + offset::m_iShotsFired); // Get The Number Of Shots Fired
+			vPunch = Read<Vector2>(dwLocal + offset::m_aimPunchAngle); // Get The Aim Punch Angle
+			int pShotsFired = Read<int>(dwLocal + offset::m_iShotsFired); // Get The Number Of Shots Fired
 
 			if (pShotsFired >= 1)
 			{
-				DWORD activeWeapon = mMemory.Read<DWORD>(dwLocal + offset::m_hActiveWeapon) & 0xFFF;
-				activeWeapon = mMemory.Read<DWORD>(mModule.dwBaseAddr +  offset::dwEntityList + (activeWeapon - 1) * 0x10);
+				DWORD activeWeapon = Read<DWORD>(dwLocal + offset::m_hActiveWeapon) & 0xFFF;
+				activeWeapon = Read<DWORD>(mModule.dwBaseAddr + offset::dwEntityList + (activeWeapon - 1) * 0x10);
 				if (!activeWeapon)
 				{
 					continue;
 				}
 
-				short weaponIndex = mMemory.Read<short>(activeWeapon + offset::m_iItemDefinitionIndex);
+				short weaponIndex = Read<short>(activeWeapon + offset::m_iItemDefinitionIndex);
 				std::string weaponName = wWeapon.getWeaponNameByIndex(weaponIndex);
 				if (weaponName == "0")
 				{
@@ -64,9 +63,9 @@ void CNoRecoil::Hack(bool _switch)
 					|| weaponName == "Negev" || weaponName == "MP7" || weaponName == "MP9" || weaponName == "SG 553"
 					|| weaponName == "M4A1-S" || weaponName == "CZ75-Auto")
 				{
-					dwClientState = mMemory.Read<DWORD>(mModuleEngine.dwBaseAddr + offset::dwClientState);	//Read ClientState
-					CurrentViewAngles = mMemory.Read<Vector2>(dwClientState + offset::dwClientState_ViewAngles);//Read The ViewAngles Using The ClientState
-
+					dwClientState = Read<DWORD>(mModuleEngine.dwBaseAddr + offset::dwClientState);	//Read ClientState
+					CurrentViewAngles = Read<Vector2>(dwClientState + offset::dwClientState_ViewAngles);//Read The ViewAngles Using The ClientState
+					
 					NewViewAngles.x = ((CurrentViewAngles.x + OldAimPunch.x) - (vPunch.x * 2.f));		//Get The AimPunch Angle Relative To Previous (Otherwise To Current vAngle)
 					NewViewAngles.y = ((CurrentViewAngles.y + OldAimPunch.y) - (vPunch.y * 2.f));
 
@@ -93,7 +92,7 @@ void CNoRecoil::Hack(bool _switch)
 					OldAimPunch.x = vPunch.x * 2.f; //Set Previous Punch To Current
 					OldAimPunch.y = vPunch.y * 2.f;
 
-					mMemory.Write<Vector2>(dwClientState + offset::dwClientState_ViewAngles, NewViewAngles);// Write The vAngles 
+					Write<Vector2>(dwClientState + offset::dwClientState_ViewAngles, NewViewAngles);// Write The vAngles 
 				}
 			}
 			else

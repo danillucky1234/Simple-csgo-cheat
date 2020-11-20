@@ -25,16 +25,17 @@ struct Process
 
 class Memory
 {
-private:
+protected:
 	Process pProcess;
 	MODULE mModule;
 	MODULEENGINE mModuleEngine;
 public:
 	bool AddModule(std::string nameOfDll);
-	MODULE getModule() { return mModule; };
+
 	DWORD SetPIDAndHandle(const char* AProcessName);
 	HANDLE getProcessHandle() { return pProcess.hHandle; };
 	Process getProcess() { return pProcess; };
+	MODULE getModule() { return mModule; };
 	DWORD getBaseAddr() { return mModule.dwBaseAddr; };
 	MODULEENGINE getModuleEngine() { return mModuleEngine; };
 

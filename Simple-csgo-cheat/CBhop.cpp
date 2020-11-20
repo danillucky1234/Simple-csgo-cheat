@@ -10,8 +10,6 @@ CBhop::CBhop(MODULE mModule, Process pProcess)
 {
 	this->mModule = mModule;
 	this->pProcess = pProcess;
-	mMemory.setProcess(this->pProcess);
-	mMemory.setModule(this->mModule);
 }
 
 void CBhop::Hack(bool _switch)
@@ -21,7 +19,7 @@ void CBhop::Hack(bool _switch)
 	BYTE jumpState{ 0 };
 	while (true)
 	{
-		dwLocal = mMemory.Read<DWORD>(mModule.dwBaseAddr + offset::dwLocalPlayer); // read te player`s location
+		dwLocal = Read<DWORD>(mModule.dwBaseAddr + offset::dwLocalPlayer); // read the player`s location
 		if (GetAsyncKeyState(VK_F7) & 1)
 		{
 			_switch = !_switch;
@@ -37,8 +35,8 @@ void CBhop::Hack(bool _switch)
 		}
 		if (_switch && (GetAsyncKeyState(VK_SPACE)))
 		{
-			Flag = mMemory.Read<int>(dwLocal + offset::dwFlags);
-			jumpState = mMemory.Read<byte>(mModule.dwBaseAddr + offset::dwForceJump);
+			Flag = Read<int>(dwLocal + offset::dwFlags);
+			jumpState = Read<byte>(mModule.dwBaseAddr + offset::dwForceJump);
 			std::bitset<32> DoJump{ jumpState };
 
 			if (Flag & FL_ONGROUND)
