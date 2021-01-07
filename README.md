@@ -2,7 +2,7 @@
 Extremely simple external cheat for cs go. You can use it to learn something new
 
 ## Please do not use cheats to hinder other players. Use them only for learning  
-
+Use any of the cheats at your own risk  
 # How to use
 1. You need to go to https://github.com/frk1/hazedumper/blob/master/csgo.cs and check the availability of updated offsets. If there are new offsets, be sure to replace their values in the Offsets.cpp file.
 2. Open the project in Visual Studio, set the Release configuration | x86 and build the solution.
